@@ -10,8 +10,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -25,12 +29,37 @@
                Grid.Row="1" Grid.Column="0" Margin="20"
                 Command="{Binding}" CommandParameter="selectrxdfiles"/>
         <ListBox ItemsSource="{Binding RXDFiles}" Foreground="{DynamicResource theme_backgroundAccent}" Background="{DynamicResource theme_text}"
-                   Grid.Row="1" Grid.Column="1" Margin="20" MaxHeight="200" ScrollViewer.CanContentScroll="True"/>
+                   Grid.Row="1" Grid.Column="1" Margin="20" MaxHeight="200" ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="2"/>
         
         <Button Content="Select dbc file" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="2" Grid.Column="0" Margin="20"
                 Command="{Binding}" CommandParameter="selectdbcfile"/>
-        <TextBlock x:Name="txtselectedDBCFile" Foreground="{DynamicResource theme_backgroundAccent}" Background="{DynamicResource theme_text}"
-                   Grid.Row="2" Grid.Column="1" Margin="20"/>
+        <TextBlock Text="{Binding InputPathDBCFile}" Foreground="{DynamicResource theme_backgroundAccent}" Background="{DynamicResource theme_text}"
+                   Grid.Row="2" Grid.Column="1" Margin="20" Grid.ColumnSpan="2" Padding="10"/>
+
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="3" Grid.Column="0" >
+            <TextBlock TextDecorations="Underline">Select a vehicle:</TextBlock>
+        </Label>
+        <ComboBox ItemsSource="{Binding Vehicles}" Grid.Column="1" Grid.Row="3" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+                  Margin="20"/>
+        <Button Content="New Vehicle" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="3" Grid.Column="2" Margin="20"
+                Command="{Binding}" CommandParameter="newvehicle"/>
+
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="4" Grid.Column="0" >
+            <TextBlock TextDecorations="Underline">Select a server:</TextBlock>
+        </Label>
+        <ComboBox ItemsSource="{Binding InfluxDBServers}" Grid.Column="1" Grid.Row="4" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+                  Margin="20"/>
+        <Button Content="New Server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="4" Grid.Column="2" Margin="20"
+                Command="{Binding}" CommandParameter="newserver"/>
+
+
+        <Button Content="START EXPORT" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding}" CommandParameter="export" Margin="20"/>
     </Grid>
 </UserControl>

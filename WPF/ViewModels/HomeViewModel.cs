@@ -90,6 +90,7 @@ namespace WPF.ViewModels
         }
         private void ImportDBCFile()
         {
+            InputPathDBCFile = "";
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = false;
             ofd.Filter = "DBC File (*.dbc)|*.dbc";
