@@ -48,6 +48,9 @@ namespace WPF.ViewModels
         private string _inputPathRXDFile;
         private ObservableCollection<string> _rxdFiles;
         private string _inputPathDBCFile;
+        private string _exporting;
+
+
         #endregion
 
         #region properties
@@ -65,6 +68,11 @@ namespace WPF.ViewModels
         {
             get { return _inputPathDBCFile; }
             set { _inputPathDBCFile = value; }
+        }
+        public string Exporting
+        {
+            get { return _exporting; }
+            set { _exporting = value; }
         }
 
         #endregion

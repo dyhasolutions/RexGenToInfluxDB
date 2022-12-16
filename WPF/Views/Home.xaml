@@ -19,6 +19,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Label Content="RXD file(s) exporting to InfluxDB server" x:Name="lblTitle" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -61,5 +63,10 @@
         <Button Content="START EXPORT" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding}" CommandParameter="export" Margin="20"/>
+
+        <Label Content="{Binding Exporting}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="6" Grid.Column="1"/>
+        <Label Content="{Binding ExportStatus}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="7" Grid.Column="1"/>
     </Grid>
 </UserControl>

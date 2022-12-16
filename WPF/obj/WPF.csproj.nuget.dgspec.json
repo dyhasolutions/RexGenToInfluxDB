@@ -4,6 +4,40 @@
     "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\WPF\\WPF.csproj": {}
   },
   "projects": {
+    "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\DAL\\DAL.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\DAL\\DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\DAL\\DAL.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\MODELS\\MODELS.csproj": {
+                "projectPath": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\MODELS\\MODELS.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\MODELS\\MODELS.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\MODELS\\MODELS.csproj",
+        "projectName": "MODELS",
+        "projectPath": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\MODELS\\MODELS.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
     "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\WPF\\WPF.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -33,7 +67,11 @@
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\DAL\\DAL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -63,6 +101,16 @@
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[4.6.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.32, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.32, )"
             },
             "PropertyChanged.Fody": {
               "target": "Package",
