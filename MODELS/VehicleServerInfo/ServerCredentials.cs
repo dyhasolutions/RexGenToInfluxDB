@@ -1,4 +1,6 @@
-﻿namespace MODELS.VehicleServerInfo
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MODELS.VehicleServerInfo
 {
     public class ServerCredentials
     {
@@ -27,7 +29,7 @@
             set { _login = value; }
         }
 
-
+        [Key]
         public int ID
         {
             get { return _id; }

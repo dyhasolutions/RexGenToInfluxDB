@@ -219,6 +219,8 @@
     <Compile Include="TimestampData.cs" />
     <Compile Include="VehicleServerInfo\Datalogger.cs" />
     <Compile Include="VehicleServerInfo\DataloggerType.cs" />
+    <Compile Include="VehicleServerInfo\Partials\Server.cs" />
+    <Compile Include="VehicleServerInfo\Partials\Vehicle.cs" />
     <Compile Include="VehicleServerInfo\Server.cs" />
     <Compile Include="VehicleServerInfo\ServerCredentials.cs" />
     <Compile Include="VehicleServerInfo\ServerType.cs" />

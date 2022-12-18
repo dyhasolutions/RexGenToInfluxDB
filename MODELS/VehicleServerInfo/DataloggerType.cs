@@ -1,4 +1,6 @@
-﻿namespace MODELS.VehicleServerInfo
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MODELS.VehicleServerInfo
 {
     public class DataloggerType
     {
@@ -21,21 +23,21 @@
             set { _memoryStorage = value; }
         }
 
-
+        [Required]
         public string Type
         {
             get { return _type; }
             set { _type = value; }
         }
 
-
+        [Required]
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-
+        [Key]
         public int ID
         {
             get { return _id; }

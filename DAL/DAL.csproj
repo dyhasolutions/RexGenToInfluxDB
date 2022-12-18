@@ -222,9 +222,9 @@
     <Compile Include="Data\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="InfluxDBService\InfluxDBHelper.cs" />
     <Compile Include="InfluxDBService\InfluxDBService.cs" />
-    <Compile Include="Migrations\20221216153550_initial.cs" />
-    <Compile Include="Migrations\20221216153550_initial.designer.cs">
-      <DependentUpon>20221216153550_initial.cs</DependentUpon>
+    <Compile Include="Migrations\20221218162246_initialCreate.cs" />
+    <Compile Include="Migrations\20221218162246_initialCreate.designer.cs">
+      <DependentUpon>20221218162246_initialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VehicleServerContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

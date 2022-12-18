@@ -4,13 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1250">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,52 +25,127 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Label Content="RXD file(s) exporting to InfluxDB server" x:Name="lblTitle" HorizontalAlignment="Center" VerticalAlignment="Center" 
-               FontWeight="Heavy" FontStretch="UltraCondensed"  FontSize="30" Grid.ColumnSpan="4"
+               FontWeight="Heavy" FontStretch="UltraCondensed"  FontSize="30" Grid.ColumnSpan="6"
                Foreground="{DynamicResource theme_backgroundAccent}" />
         
+        <!--#region form-->
         <Button Content="Select .rxd file(s)" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="1" Grid.Column="0" Margin="20"
                 Command="{Binding}" CommandParameter="selectrxdfiles"/>
         <ListBox ItemsSource="{Binding RXDFiles}" Foreground="{DynamicResource theme_backgroundAccent}" Background="{DynamicResource theme_text}"
-                   Grid.Row="1" Grid.Column="1" Margin="20" MaxHeight="200" ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="2"/>
+                   Grid.Row="1" Grid.Column="1" Margin="20" MaxHeight="200" ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="5"/>
         
         <Button Content="Select dbc file" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="2" Grid.Column="0" Margin="20"
                 Command="{Binding}" CommandParameter="selectdbcfile"/>
         <TextBlock Text="{Binding InputPathDBCFile}" Foreground="{DynamicResource theme_backgroundAccent}" Background="{DynamicResource theme_text}"
-                   Grid.Row="2" Grid.Column="1" Margin="20" Grid.ColumnSpan="2" Padding="10"/>
+                   Grid.Row="2" Grid.Column="1" Margin="20" Grid.ColumnSpan="5" Padding="10"/>
 
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
                Margin="20" Grid.Row="3" Grid.Column="0" >
             <TextBlock TextDecorations="Underline">Select a vehicle:</TextBlock>
         </Label>
-        <ComboBox ItemsSource="{Binding Vehicles}" Grid.Column="1" Grid.Row="3" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-                  Margin="20"/>
+        <ComboBox ItemsSource="{Binding Vehicles}" Grid.Column="1" Grid.Row="3" Foreground="{DynamicResource theme_text}" 
+                  Background="{DynamicResource theme_backgroundAccent}" Width="800"
+                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select a vehicle."/>
         <Button Content="New Vehicle" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-               Grid.Row="3" Grid.Column="2" Margin="20"
+               Grid.Row="3" Grid.Column="6" Margin="20"
                 Command="{Binding}" CommandParameter="newvehicle"/>
 
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
                Margin="20" Grid.Row="4" Grid.Column="0" >
             <TextBlock TextDecorations="Underline">Select a server:</TextBlock>
         </Label>
-        <ComboBox ItemsSource="{Binding InfluxDBServers}" Grid.Column="1" Grid.Row="4" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-                  Margin="20"/>
-        <Button Content="New Server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-               Grid.Row="4" Grid.Column="2" Margin="20"
+        <ComboBox ItemsSource="{Binding Servers}" Grid.Column="1" Grid.Row="4" Foreground="{DynamicResource theme_text}" 
+                  Background="{DynamicResource theme_backgroundAccent}"
+                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select an InfluxDb server."/>
+        <Button Content="New InfluxDB Server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="4" Grid.Column="6" Margin="20"
                 Command="{Binding}" CommandParameter="newserver"/>
+        <!--#endregion-->
+        
+        <!--#region New vehicle form-->
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="5" Grid.Column="0"  Visibility="{Binding CreateVehicleVisibility}">
+            <TextBlock TextDecorations="Underline">Manufacturer:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Manufacturer, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the manufacturer of the vehicle." Margin="20" BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="left" Width="280" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateVehicleVisibility}"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="10" Grid.Row="5" Grid.Column="2"  Visibility="{Binding CreateVehicleVisibility}">
+            <TextBlock TextDecorations="Underline">Model:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding Model, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the model of the vehicle." Margin="10" BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="Center" Width="280" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateVehicleVisibility}"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="10" Grid.Row="5" Grid.Column="4"  Visibility="{Binding CreateVehicleVisibility}">
+            <TextBlock TextDecorations="Underline">Type:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Type, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the type of the vehicle." Margin="20" BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="Center" Width="170" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateVehicleVisibility}"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="6" Grid.Column="0" Visibility="{Binding CreateVehicleVisibility}">
+            <TextBlock TextDecorations="Underline">VIN:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding VIN, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the model of the vehicle." Margin="20" BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="Left" Width="280" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateVehicleVisibility}"/>
+        <Button Content="Create New Vehicle" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding}" CommandParameter="createnewvehicle" Margin="20" Visibility="{Binding CreateVehicleVisibility}"/>
+        <!--#endregion-->
 
+        <!--#region New InfluxDB server form-->
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="7" Grid.Column="0"  Visibility="{Binding CreateServerVisibility}">
+            <TextBlock TextDecorations="Underline">Server alias:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Name, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the server alias." Margin="20" BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="left" Width="280" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateServerVisibility}"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="10" Grid.Row="7" Grid.Column="2"  Visibility="{Binding CreateServerVisibility}">
+            <TextBlock TextDecorations="Underline">IP or URL:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding IP_URL, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the IP-adress or the URL of the InfluxDB server." Margin="20" 
+                 BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="Left" Width="570" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateServerVisibility}" Grid.ColumnSpan="3"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="8" Grid.Column="0" Visibility="{Binding CreateServerVisibility}">
+            <TextBlock TextDecorations="Underline">Token:</TextBlock>
+        </Label>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Token, ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="Fill in the token to acces the InfluxDB server." Margin="20" 
+                 BorderBrush="{DynamicResource theme_text}"
+                        HorizontalAlignment="Left" Width="800" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateServerVisibility}" Grid.ColumnSpan="4"/>
+        <Button Content="Create New InfluxDB server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
+               Grid.Row="8" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding}" CommandParameter="createnewserver" Margin="20" Visibility="{Binding CreateServerVisibility}"/>
+        <!--#endregion-->
 
         <Button Content="START EXPORT" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-               Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding}" CommandParameter="export" Margin="20"/>
 
-        <Label Content="{Binding Exporting}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
-               Margin="20" Grid.Row="6" Grid.Column="1"/>
-        <Label Content="{Binding ExportStatus}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource theme_text}"
-               Margin="20" Grid.Row="7" Grid.Column="1"/>
+        <Label Content="{Binding ExportingStatus}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" 
+               Foreground="{DynamicResource theme_text}"
+               Margin="20" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="6"/>
     </Grid>
 </UserControl>

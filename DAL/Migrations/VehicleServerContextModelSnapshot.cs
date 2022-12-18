@@ -22,15 +22,19 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("SelectedDataloggerTypeID")
+                    b.Property<int?>("DataloggerID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DataloggerTypeID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SerialNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SelectedDataloggerTypeID");
+                    b.HasIndex("DataloggerTypeID");
 
                     b.ToTable("Dataloggers");
                 });
@@ -48,9 +52,11 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -65,22 +71,24 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("IP_URL")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SelectedServerCredentialsID")
+                    b.Property<int>("ServerCredentialsID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("SelectedServerTypeID")
+                    b.Property<int>("ServerTypeID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SelectedServerCredentialsID");
+                    b.HasIndex("ServerCredentialsID");
 
-                    b.HasIndex("SelectedServerTypeID");
+                    b.HasIndex("ServerTypeID");
 
                     b.ToTable("Servers");
                 });
@@ -112,6 +120,7 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -125,51 +134,59 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("InstalledDataloggerID")
+                    b.Property<int?>("DataloggerID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Manufacturer")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VIN")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InstalledDataloggerID");
+                    b.HasIndex("DataloggerID");
 
                     b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("MODELS.VehicleServerInfo.Datalogger", b =>
                 {
-                    b.HasOne("MODELS.VehicleServerInfo.DataloggerType", "SelectedDataloggerType")
+                    b.HasOne("MODELS.VehicleServerInfo.DataloggerType", "DataloggerType")
                         .WithMany()
-                        .HasForeignKey("SelectedDataloggerTypeID");
+                        .HasForeignKey("DataloggerTypeID");
                 });
 
             modelBuilder.Entity("MODELS.VehicleServerInfo.Server", b =>
                 {
-                    b.HasOne("MODELS.VehicleServerInfo.ServerCredentials", "SelectedServerCredentials")
+                    b.HasOne("MODELS.VehicleServerInfo.ServerCredentials", "ServerCredentials")
                         .WithMany()
-                        .HasForeignKey("SelectedServerCredentialsID");
+                        .HasForeignKey("ServerCredentialsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("MODELS.VehicleServerInfo.ServerType", "SelectedServerType")
+                    b.HasOne("MODELS.VehicleServerInfo.ServerType", "ServerType")
                         .WithMany()
-                        .HasForeignKey("SelectedServerTypeID");
+                        .HasForeignKey("ServerTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MODELS.VehicleServerInfo.Vehicle", b =>
                 {
-                    b.HasOne("MODELS.VehicleServerInfo.Datalogger", "InstalledDatalogger")
+                    b.HasOne("MODELS.VehicleServerInfo.Datalogger", "Datalogger")
                         .WithMany()
-                        .HasForeignKey("InstalledDataloggerID");
+                        .HasForeignKey("DataloggerID");
                 });
 #pragma warning restore 612, 618
         }

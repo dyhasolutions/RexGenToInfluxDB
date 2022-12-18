@@ -12,11 +12,7 @@ namespace WPF.ViewModels
     {
         #region constructor
 
-        public MainViewModel()
-        {
-            //Theme = "B";
-            //IconTheme = "MoonWaningCrescent";
-        }
+        public MainViewModel() {}
 
         #endregion constructor
 
