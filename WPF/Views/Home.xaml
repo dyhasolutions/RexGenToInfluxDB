@@ -104,7 +104,7 @@
                         HorizontalAlignment="Left" Width="280" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
                   Visibility="{Binding CreateVehicleVisibility}"/>
         <Button Content="Create New Vehicle" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-               Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Grid.Row="6" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center"
                 Command="{Binding}" CommandParameter="createnewvehicle" Margin="20" Visibility="{Binding CreateVehicleVisibility}"/>
         <!--#endregion-->
 
@@ -133,10 +133,10 @@
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Token, ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="Fill in the token to acces the InfluxDB server." Margin="20" 
                  BorderBrush="{DynamicResource theme_text}"
-                        HorizontalAlignment="Left" Width="800" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
-                  Visibility="{Binding CreateServerVisibility}" Grid.ColumnSpan="4"/>
+                        HorizontalAlignment="Left" Width="710" Height="auto" VerticalAlignment="Center" Foreground="{DynamicResource theme_text}" 
+                  Visibility="{Binding CreateServerVisibility}" Grid.ColumnSpan="3"/>
         <Button Content="Create New InfluxDB server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
-               Grid.Row="8" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Grid.Row="8" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2"
                 Command="{Binding}" CommandParameter="createnewserver" Margin="20" Visibility="{Binding CreateServerVisibility}"/>
         <!--#endregion-->
 
