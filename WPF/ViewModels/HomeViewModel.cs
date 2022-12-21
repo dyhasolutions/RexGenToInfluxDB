@@ -1,4 +1,5 @@
 ﻿using DAL.Data.UnitOfWork;
+using DAL.InfluxDBService;
 using DAL.VehicleServerService;
 using Microsoft.Win32;
 using MODELS.VehicleServerInfo;
@@ -10,11 +11,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WPF.Views;
+using DbcParserLib;
+using DbcParserLib.Influx;
+using System.IO;
+using InfluxShared;
+using MODELS;
+using InfluxShared.FileObjects;
+using RXD.Base;
 
 namespace WPF.ViewModels
 {
     public class HomeViewModel : MainViewModel
     {
+        InfluxDBHelper InfluxDBHelper = new InfluxDBHelper();
+
         #region constructor
         public HomeViewModel()
         {
@@ -48,11 +58,14 @@ namespace WPF.ViewModels
                     CreateServerVisibility = Visibility.Visible; ; 
                     break;
                 case "createnewserver": CreateNewServer(); break;
+                case "export": ExportRXDFilesToInfluxDB(); break;
 
                 default:
                     break;
             }
         }
+
+
         public override string this[string columnName]
         {
             get
@@ -106,6 +119,7 @@ namespace WPF.ViewModels
         private string _type;
         private string _vin;
         private Visibility _createVehicleVisibility;
+        private Vehicle _selectedVehicle;
         #endregion
 
         #region InfluxDB server attributes
@@ -114,6 +128,9 @@ namespace WPF.ViewModels
         private string _name;
         private string _token;
         private ServerType _serverType;
+        private Server _selectedServer;
+
+
         #endregion
 
         #endregion
@@ -177,6 +194,11 @@ namespace WPF.ViewModels
             get { return _model; }
             set { _model = value; }
         }
+        public Vehicle SelectedVehicle
+        {
+            get { return _selectedVehicle; }
+            set { _selectedVehicle = value; NotifyPropertyChanged(); }
+        }
         #endregion
 
         #region InfluxDB server properties
@@ -204,6 +226,11 @@ namespace WPF.ViewModels
         {
             get { return _serverType; }
             set { _serverType = value; }
+        }
+        public Server SelectedServer
+        {
+            get { return _selectedServer; }
+            set { _selectedServer = value; NotifyPropertyChanged(); }
         }
         #endregion
 
@@ -391,6 +418,89 @@ namespace WPF.ViewModels
                 Type = "";
                 VIN = "";
             }
+        }
+        private void ExportRXDFilesToInfluxDB()
+        {
+            CreateVehicleVisibility = Visibility.Collapsed;
+            CreateServerVisibility = Visibility.Collapsed;
+            ExportingStatus = "";
+
+            //DBC logic
+            Stream dbcStream = new MemoryStream(File.ReadAllBytes(InputPathDBCFile));
+            Dbc dbc = Parser.ParseFromStream(dbcStream);
+            DBC influxDBC = (DbcToInfluxObj.FromDBC(dbc) as DBC);
+            ExportDbcCollection signalsCollection = DbcToInfluxObj.LoadExportSignalsFromDBC(influxDBC);
+
+            MemoryStream outStream = new MemoryStream();
+            List<TimestampData> timestampDatas = new List<TimestampData>();
+
+            #region form checks
+            if (RXDFiles == null)
+            {
+                ExportingStatus = "Select the necesarry RXD file(s)." + Environment.NewLine;
+            };
+            if (InputPathDBCFile == null)
+            {
+                ExportingStatus += "Select a DBC file." + Environment.NewLine;
+            }
+            if (SelectedVehicle == null)
+            {
+                ExportingStatus += "Select a vehicle." + Environment.NewLine;
+            }
+            else
+            {
+                SelectedVehicle = unitOfWork.VehicleRepo
+                    .Get()
+                    .Where(x => x.ID == SelectedVehicle.ID)
+                    .FirstOrDefault();
+            }
+            if (SelectedServer == null)
+            {
+                ExportingStatus += "Select an InfluxDB server.";
+            }
+            else
+            {
+                SelectedServer = unitOfWork.ServerRepo
+                    .Get()
+                    .Where(x => x.ID == SelectedServer.ID)
+                    .FirstOrDefault();
+            }
+            #endregion
+
+            try
+            {
+                foreach (string rxdFile in RXDFiles)
+                {
+                    Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
+                    string filename = Path.GetFileName(rxdFile);
+
+                    //using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
+                    //    if (rxd is not null)
+                    //    {
+                    //        timestampDatas = rxd.ToDoubleData(new BinRXD.ExportSettings()
+                    //        {
+                    //            StorageCache = StorageCacheType.Memory,
+                    //            SignalsDatabase = new()
+                    //            {
+                    //                dbcCollection = signalsCollection
+                    //            }
+                    //        }
+                    //        );
+                    //    };
+                    //InfluxDBHelper.WriteToInfluxDB(timestampDatas, test);
+                    //using (FileStream fs = new FileStream("C:/Users/dylan/Desktop/test.csv", FileMode.Create, System.IO.FileAccess.Write))
+                    //    DataHelper.Convert(rxd, new BinRXD.ExportSettings()
+                    //    {
+                    //        StorageCache = StorageCacheType.Memory,
+                    //        SignalsDatabase = new() { dbcCollection = signalsCollection },
+                    //    }, fs, "csv:influxdb");
+                }
+            }
+            catch (Exception ex)
+            {
+                ExportingStatus = ex.ToString();
+            }
+
         }
         #endregion
     }

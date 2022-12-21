@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32002.261
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF", "WPF\WPF.csproj", "{44B0DEF3-9C14-49E5-8299-BAFCE527732B}"
 EndProject
@@ -17,13 +17,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MatlabFile", "Libraries\Mat
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MDF4xx", "Libraries\MDF4xx\MDF4xx.shproj", "{432F235E-6775-4749-A2EF-827359BAB8E5}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BinRXD", "Libraries\RXD\BinRXD\BinRXD.shproj", "{30D6E0C6-5E82-4FFC-B4CA-C4D671E26C53}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Libraries\MDF4xx\MDF4xx.projitems*{432f235e-6775-4749-a2ef-827359bab8e5}*SharedItemsImports = 13
-		Libraries\InfluxShared\InfluxShared.projitems*{5d304db9-4a8e-453f-89e1-34a74f91e0ef}*SharedItemsImports = 13
-		Libraries\MatlabFile\MatlabFile.projitems*{bc796a4e-2f4e-441f-be3b-3bf8c11c5b6f}*SharedItemsImports = 13
-		Libraries\DbcParser\DbcParser.projitems*{cbd41cac-6cd2-42da-951e-6ade1d8657d0}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -47,5 +43,17 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FC61D48-42B2-4459-9559-E80A7CC1D5B0}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Libraries\RXD\BinRXD\BinRXD.projitems*{30d6e0c6-5e82-4ffc-b4ca-c4d671e26c53}*SharedItemsImports = 13
+		Libraries\MDF4xx\MDF4xx.projitems*{432f235e-6775-4749-a2ef-827359bab8e5}*SharedItemsImports = 13
+		Libraries\InfluxShared\InfluxShared.projitems*{5d304db9-4a8e-453f-89e1-34a74f91e0ef}*SharedItemsImports = 13
+		Libraries\DbcParser\DbcParser.projitems*{b51ac7d1-4714-489f-af94-ab292b74f9cd}*SharedItemsImports = 4
+		Libraries\InfluxShared\InfluxShared.projitems*{b51ac7d1-4714-489f-af94-ab292b74f9cd}*SharedItemsImports = 4
+		Libraries\MatlabFile\MatlabFile.projitems*{b51ac7d1-4714-489f-af94-ab292b74f9cd}*SharedItemsImports = 4
+		Libraries\MDF4xx\MDF4xx.projitems*{b51ac7d1-4714-489f-af94-ab292b74f9cd}*SharedItemsImports = 4
+		Libraries\RXD\BinRXD\BinRXD.projitems*{b51ac7d1-4714-489f-af94-ab292b74f9cd}*SharedItemsImports = 4
+		Libraries\MatlabFile\MatlabFile.projitems*{bc796a4e-2f4e-441f-be3b-3bf8c11c5b6f}*SharedItemsImports = 13
+		Libraries\DbcParser\DbcParser.projitems*{cbd41cac-6cd2-42da-951e-6ade1d8657d0}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

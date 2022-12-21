@@ -1,6 +1,6 @@
 ﻿using InfluxShared.Generic;
 using InfluxShared.Helpers;
-using Ionic.Zlib;
+using OfficeOpenXml.Packaging.Ionic.Zlib;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -1014,44 +1014,44 @@ namespace InfluxShared.FileObjects
             bufferPos = 0;
         }
 
-        public void WriteCanMessage(UInt32 CanID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] CanData)
-        {
-            if (DLC > 8)
-                return;
+        //public void WriteCanMessage(UInt32 CanID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] CanData)
+        //{
+        //    if (DLC > 8)
+        //        return;
 
-            CanMessage msg = new CanMessage()
-            {
-                m_Header = new ObjectHeader()
-                {
-                    m_Header = new ObjectHeaderBase()
-                    {
-                        m_Signature = "LOBJ".ToCharArray(),
-                        m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
-                        m_HeaderVersion = 1,
-                        m_ObjectType = ObjType.CAN_MESSAGE,
-                        m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(CanMessage)),
-                    },
-                    m_Flags = 2,
-                    m_TimeStamp = Timestamp * 1000,
-                },
-                m_Channel = BusChannel,
-                m_Flags = (byte)(0 | (isTx.AsByte() & 0x0F)),
-                m_DLC = DLC,
-                m_ID = CanID,
-                m_Data = new byte[8],
-            };
-            Array.Copy(CanData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
+        //    CanMessage msg = new CanMessage()
+        //    {
+        //        m_Header = new ObjectHeader()
+        //        {
+        //            m_Header = new ObjectHeaderBase()
+        //            {
+        //                m_Signature = "LOBJ".ToCharArray(),
+        //                m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
+        //                m_HeaderVersion = 1,
+        //                m_ObjectType = ObjType.CAN_MESSAGE,
+        //                m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(CanMessage)),
+        //            },
+        //            m_Flags = 2,
+        //            m_TimeStamp = Timestamp * 1000,
+        //        },
+        //        m_Channel = BusChannel,
+        //        m_Flags = (byte)(0 | (isTx.AsByte() & 0x0F)),
+        //        m_DLC = DLC,
+        //        m_ID = CanID,
+        //        m_Data = new byte[8],
+        //    };
+        //    Array.Copy(CanData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
 
-            if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
-                Compress();
+        //    if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
+        //        Compress();
 
-            ObjectsCount++;
-            ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
+        //    ObjectsCount++;
+        //    ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
 
-            byte[] data = Bytes.ObjectToBytes(msg);
-            Array.Copy(data, 0, buffer, bufferPos, data.Length);
-            bufferPos += (uint)data.Length;
-        }
+        //    byte[] data = Bytes.ObjectToBytes(msg);
+        //    Array.Copy(data, 0, buffer, bufferPos, data.Length);
+        //    bufferPos += (uint)data.Length;
+        //}
 
         public void WriteCanError(UInt64 Timestamp, byte BusChannel, byte ErrorCode)
         {
@@ -1087,137 +1087,137 @@ namespace InfluxShared.FileObjects
             bufferPos += (uint)data.Length;
         }
 
-        public void WriteCanFDMessage(UInt32 CanID, UInt64 Timestamp, byte BusChannel, bool isTx, bool isBRS, byte DLC, byte[] CanData)
-        {
-            byte canLength = (byte)DlcFDList.IndexOf(DLC);
+        //public void WriteCanFDMessage(UInt32 CanID, UInt64 Timestamp, byte BusChannel, bool isTx, bool isBRS, byte DLC, byte[] CanData)
+        //{
+        //    byte canLength = (byte)DlcFDList.IndexOf(DLC);
 
-            CanFDMessage msg = new CanFDMessage()
-            {
-                m_Header = new ObjectHeader()
-                {
-                    m_Header = new ObjectHeaderBase()
-                    {
-                        m_Signature = "LOBJ".ToCharArray(),
-                        m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
-                        m_HeaderVersion = 1,
-                        m_ObjectType = ObjType.CAN_FD_MESSAGE_64,
-                        m_ObjectSize = (UInt32)(Marshal.SizeOf(typeof(CanFDMessage)) + canLength),
-                    },
-                    m_Flags = 2,
-                    m_TimeStamp = Timestamp * 1000,
-                },
-                m_Channel = BusChannel,
-                m_Flags = (uint)((1 << 12) | (isBRS.AsByte() << 13)),
-                m_DLC = DLC,
-                m_ValidDataBytes = canLength,
-                m_Dir = isTx.AsByte(),
-                m_ID = CanID,
-            };
+        //    CanFDMessage msg = new CanFDMessage()
+        //    {
+        //        m_Header = new ObjectHeader()
+        //        {
+        //            m_Header = new ObjectHeaderBase()
+        //            {
+        //                m_Signature = "LOBJ".ToCharArray(),
+        //                m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
+        //                m_HeaderVersion = 1,
+        //                m_ObjectType = ObjType.CAN_FD_MESSAGE_64,
+        //                m_ObjectSize = (UInt32)(Marshal.SizeOf(typeof(CanFDMessage)) + canLength),
+        //            },
+        //            m_Flags = 2,
+        //            m_TimeStamp = Timestamp * 1000,
+        //        },
+        //        m_Channel = BusChannel,
+        //        m_Flags = (uint)((1 << 12) | (isBRS.AsByte() << 13)),
+        //        m_DLC = DLC,
+        //        m_ValidDataBytes = canLength,
+        //        m_Dir = isTx.AsByte(),
+        //        m_ID = CanID,
+        //    };
 
-            if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
-                Compress();
+        //    if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
+        //        Compress();
 
-            ObjectsCount++;
-            ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
+        //    ObjectsCount++;
+        //    ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
 
-            byte[] data = Bytes.ObjectToBytes(msg);
-            Array.Copy(data, 0, buffer, bufferPos, data.Length);
-            bufferPos += (uint)data.Length;
-            Array.Copy(CanData, 0, buffer, bufferPos, canLength);
-            bufferPos += canLength;
-        }
+        //    byte[] data = Bytes.ObjectToBytes(msg);
+        //    Array.Copy(data, 0, buffer, bufferPos, data.Length);
+        //    bufferPos += (uint)data.Length;
+        //    Array.Copy(CanData, 0, buffer, bufferPos, canLength);
+        //    bufferPos += canLength;
+        //}
 
-        public void WriteLinMessage(byte LinID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] LinData)
-        {
-            if (DLC > 8)
-                return;
+        //public void WriteLinMessage(byte LinID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] LinData)
+        //{
+        //    if (DLC > 8)
+        //        return;
 
-            LinMessage2 msg = new LinMessage2()
-            {
-                m_Header = new ObjectHeader()
-                {
-                    m_Header = new ObjectHeaderBase()
-                    {
-                        m_Signature = "LOBJ".ToCharArray(),
-                        m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
-                        m_HeaderVersion = 1,
-                        m_ObjectType = ObjType.LIN_MESSAGE2,
-                        m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(LinMessage2)),
-                    },
-                    m_Flags = 2,
-                    m_TimeStamp = Timestamp * 1000,
-                },
-                m_LinTimestampEvent = new LinTimestampEvent()
-                { 
-                    m_LinMsgDescrEvent = new LinMessageDescriptor()
-                    {
-                        m_LinSynchFieldEvent = new LinSynchFieldEvent()
-                        {
-                            m_LinBusEvent = new LinBusEvent()
-                            {
-                                m_SOF = Timestamp * 1000,
-                                m_Channel = BusChannel,
-                            },
-                        },
-                        m_DLC = DLC,
-                        m_ID = LinID,
-                        m_MessageID = LinID,
-                    }
-                },
-                m_Dir = (byte)(0 | (isTx.AsByte() & 0x0F)),
-                m_Data = new byte[8],
-            };
-            Array.Copy(LinData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
+        //    LinMessage2 msg = new LinMessage2()
+        //    {
+        //        m_Header = new ObjectHeader()
+        //        {
+        //            m_Header = new ObjectHeaderBase()
+        //            {
+        //                m_Signature = "LOBJ".ToCharArray(),
+        //                m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
+        //                m_HeaderVersion = 1,
+        //                m_ObjectType = ObjType.LIN_MESSAGE2,
+        //                m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(LinMessage2)),
+        //            },
+        //            m_Flags = 2,
+        //            m_TimeStamp = Timestamp * 1000,
+        //        },
+        //        m_LinTimestampEvent = new LinTimestampEvent()
+        //        { 
+        //            m_LinMsgDescrEvent = new LinMessageDescriptor()
+        //            {
+        //                m_LinSynchFieldEvent = new LinSynchFieldEvent()
+        //                {
+        //                    m_LinBusEvent = new LinBusEvent()
+        //                    {
+        //                        m_SOF = Timestamp * 1000,
+        //                        m_Channel = BusChannel,
+        //                    },
+        //                },
+        //                m_DLC = DLC,
+        //                m_ID = LinID,
+        //                m_MessageID = LinID,
+        //            }
+        //        },
+        //        m_Dir = (byte)(0 | (isTx.AsByte() & 0x0F)),
+        //        m_Data = new byte[8],
+        //    };
+        //    Array.Copy(LinData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
 
-            if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
-                Compress();
+        //    if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
+        //        Compress();
 
-            ObjectsCount++;
-            ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
+        //    ObjectsCount++;
+        //    ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
 
-            byte[] data = Bytes.ObjectToBytes(msg);
-            Array.Copy(data, 0, buffer, bufferPos, data.Length);
-            bufferPos += (uint)data.Length;
-        }
+        //    byte[] data = Bytes.ObjectToBytes(msg);
+        //    Array.Copy(data, 0, buffer, bufferPos, data.Length);
+        //    bufferPos += (uint)data.Length;
+        //}
 
-        public void WriteLinCrcError(byte LinID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] LinData)
-        {
-            if (DLC > 8)
-                return;
+        //public void WriteLinCrcError(byte LinID, UInt64 Timestamp, byte BusChannel, bool isTx, byte DLC, byte[] LinData)
+        //{
+        //    if (DLC > 8)
+        //        return;
 
-            LinCrcError msg = new LinCrcError()
-            {
-                m_Header = new ObjectHeader()
-                {
-                    m_Header = new ObjectHeaderBase()
-                    {
-                        m_Signature = "LOBJ".ToCharArray(),
-                        m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
-                        m_HeaderVersion = 1,
-                        m_ObjectType = ObjType.LIN_CRC_ERROR,
-                        m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(LinCrcError)),
-                    },
-                    m_Flags = 2,
-                    m_TimeStamp = Timestamp * 1000,
-                },
-                m_Channel = BusChannel,
-                m_DLC = DLC,
-                m_Dir = (byte)(0 | (isTx.AsByte() & 0x0F)),
-                m_ID = LinID,
-                m_Data = new byte[8],
-            };
-            Array.Copy(LinData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
+        //    LinCrcError msg = new LinCrcError()
+        //    {
+        //        m_Header = new ObjectHeader()
+        //        {
+        //            m_Header = new ObjectHeaderBase()
+        //            {
+        //                m_Signature = "LOBJ".ToCharArray(),
+        //                m_HeaderSize = (UInt16)Marshal.SizeOf(typeof(ObjectHeader)),
+        //                m_HeaderVersion = 1,
+        //                m_ObjectType = ObjType.LIN_CRC_ERROR,
+        //                m_ObjectSize = (UInt32)Marshal.SizeOf(typeof(LinCrcError)),
+        //            },
+        //            m_Flags = 2,
+        //            m_TimeStamp = Timestamp * 1000,
+        //        },
+        //        m_Channel = BusChannel,
+        //        m_DLC = DLC,
+        //        m_Dir = (byte)(0 | (isTx.AsByte() & 0x0F)),
+        //        m_ID = LinID,
+        //        m_Data = new byte[8],
+        //    };
+        //    Array.Copy(LinData, msg.m_Data, Math.Min(DLC, msg.m_Data.Length));
 
-            if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
-                Compress();
+        //    if (bufferPos + msg.m_Header.m_Header.m_ObjectSize >= BufferSize)
+        //        Compress();
 
-            ObjectsCount++;
-            ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
+        //    ObjectsCount++;
+        //    ObjectsSize += msg.m_Header.m_Header.m_ObjectSize;
 
-            byte[] data = Bytes.ObjectToBytes(msg);
-            Array.Copy(data, 0, buffer, bufferPos, data.Length);
-            bufferPos += (uint)data.Length;
-        }
+        //    byte[] data = Bytes.ObjectToBytes(msg);
+        //    Array.Copy(data, 0, buffer, bufferPos, data.Length);
+        //    bufferPos += (uint)data.Length;
+        //}
 
         public void WriteLinSendError(byte LinID, UInt64 Timestamp, byte BusChannel, byte DLC)
         {

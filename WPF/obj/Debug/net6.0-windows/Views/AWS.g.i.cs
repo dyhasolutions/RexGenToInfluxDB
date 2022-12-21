@@ -61,7 +61,7 @@ namespace WPF.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPF;V1.0.0.0;component/views/aws.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPF;component/views/aws.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AWS.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

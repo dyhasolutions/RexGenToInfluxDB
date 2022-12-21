@@ -6,7 +6,7 @@ namespace InfluxShared.Helpers
 {
     public static class ReflectionsHelper
     {
-        static readonly Dictionary<Type, Dictionary<string, MemberInfo>> dtsm = new();
+        static readonly Dictionary<Type, Dictionary<string, MemberInfo>> dtsm = new Dictionary<Type, Dictionary<string, MemberInfo>>();
 
         static void InitType(Type t, Type tDump)
         {

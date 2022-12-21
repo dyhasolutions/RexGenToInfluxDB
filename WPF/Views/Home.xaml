@@ -53,7 +53,8 @@
         </Label>
         <ComboBox ItemsSource="{Binding Vehicles}" Grid.Column="1" Grid.Row="3" Foreground="{DynamicResource theme_text}" 
                   Background="{DynamicResource theme_backgroundAccent}" Width="800"
-                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select a vehicle."/>
+                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select a vehicle."
+                  SelectedItem="{Binding SelectedVehicle}"/>
         <Button Content="New Vehicle" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="3" Grid.Column="6" Margin="20"
                 Command="{Binding}" CommandParameter="newvehicle"/>
@@ -64,7 +65,8 @@
         </Label>
         <ComboBox ItemsSource="{Binding Servers}" Grid.Column="1" Grid.Row="4" Foreground="{DynamicResource theme_text}" 
                   Background="{DynamicResource theme_backgroundAccent}"
-                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select an InfluxDb server."/>
+                  Margin="20" Grid.ColumnSpan="4" materialDesign:HintAssist.Hint="Select an InfluxDb server."
+                  SelectedItem="{Binding SelectedServer}"/>
         <Button Content="New InfluxDB Server" Foreground="{DynamicResource theme_text}" Background="{DynamicResource theme_backgroundAccent}"
                Grid.Row="4" Grid.Column="6" Margin="20"
                 Command="{Binding}" CommandParameter="newserver"/>

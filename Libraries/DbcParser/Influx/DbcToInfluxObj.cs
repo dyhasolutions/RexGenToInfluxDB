@@ -16,7 +16,7 @@ namespace DbcParserLib.Influx
                 msgI.DLC = msg.DLC;
                 msgI.Comment = msg.Comment;
                 msgI.Name = msg.Name;
-                msgI.MsgType = DBCMessageType.Standard;
+                msgI.MsgType = DBCMessageType.J1939PG;
                 msgI.Transmitter = msg.Transmitter;
                 
                 influxDBC.Messages.Add(msgI);
