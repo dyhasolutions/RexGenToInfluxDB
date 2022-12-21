@@ -18,6 +18,7 @@ using InfluxShared;
 using MODELS;
 using InfluxShared.FileObjects;
 using RXD.Base;
+using DAL;
 
 namespace WPF.ViewModels
 {
@@ -474,21 +475,22 @@ namespace WPF.ViewModels
                     Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
                     string filename = Path.GetFileName(rxdFile);
 
-                    //using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
-                    //    if (rxd is not null)
-                    //    {
-                    //        timestampDatas = rxd.ToDoubleData(new BinRXD.ExportSettings()
-                    //        {
-                    //            StorageCache = StorageCacheType.Memory,
-                    //            SignalsDatabase = new()
-                    //            {
-                    //                dbcCollection = signalsCollection
-                    //            }
-                    //        }
-                    //        );
-                    //    };
+                    using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
+                        if (rxd is not null)
+                        {
+                            timestampDatas = rxd.ExportToCustomObjects(new BinRXD.ExportSettings()
+                            {
+                                StorageCache = StorageCacheType.Memory,
+                                SignalsDatabase = new()
+                                {
+                                    dbcCollection = signalsCollection
+                                }
+                            }
+                            );
+                        };
                     //InfluxDBHelper.WriteToInfluxDB(timestampDatas, test);
-                    //using (FileStream fs = new FileStream("C:/Users/dylan/Desktop/test.csv", FileMode.Create, System.IO.FileAccess.Write))
+
+                    //using (FileStream fs = new FileStream("C:/Users/dylan/Desktop/test2.csv", FileMode.Create, System.IO.FileAccess.Write))
                     //    DataHelper.Convert(rxd, new BinRXD.ExportSettings()
                     //    {
                     //        StorageCache = StorageCacheType.Memory,

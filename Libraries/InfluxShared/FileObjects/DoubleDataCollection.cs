@@ -1,4 +1,5 @@
 ﻿using InfluxShared.Helpers;
+using MODELS;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -299,12 +300,12 @@ namespace InfluxShared.FileObjects
                         for (int i = 1; i < Values.Length; i++)
                             if (!double.IsNaN(Values[i]))
                             {
-                                stream.WriteLine(
+                                string text =
                                     DisplayName + "," +
                                     this[i - 1].ChannelName + ',' +
                                     Values[i].ToString(ci) + ',' +
-                                    DateTime.FromOADate(RealTime.ToOADate() + Values[0] / 86400).ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ")
-                                );
+                                    DateTime.FromOADate(RealTime.ToOADate() + Values[0] / 86400).ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ");
+                                stream.WriteLine(text);
                             }
                         Values = GetValues();
                         ProgressCallback?.Invoke((int)(ReadingProgress * 100));
@@ -318,6 +319,102 @@ namespace InfluxShared.FileObjects
             {
                 //MessageBox.Show(e.Message);
                 return false;
+            }
+        }
+        public DateTime ToMillisecondPrecision(DateTime d)
+        {
+            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute,
+                                d.Second, d.Millisecond, d.Kind);
+        }
+
+        public List<TimestampData> ToInfluxDB(Action<object> ProgressCallback = null)
+        {
+            try
+            {
+                List<TimestampData> Results = new List<TimestampData>();
+
+                InitReading();
+                double[] Values = GetValues();
+
+                while (Values != null)
+                {
+                    for (int i = 1; i < Values.Length; i++)
+                    {
+                        if (!double.IsNaN(Values[i]))
+                        {
+                            TimestampData timestampData = new TimestampData();
+                            List<Signal> signals = new List<Signal>();
+                            string dateTime = DateTime.FromOADate(this.RealTime.ToOADate() + Values[0] / 86400).ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.ffffZ");
+                            // the list of results is empty create the first timestampdata
+                            if (Results.Count() == 0)
+                            {
+                                    Signal signal = new Signal()
+                                    {
+                                        SignalName = this[i - 1].ChannelName,
+                                        SignalUnit = this[i - 1].ChannelUnits,
+                                        SigValue = Values[i]
+                                    };
+                                    signals.Add(signal);
+
+                                    timestampData = new TimestampData()
+                                    {
+
+                                        Timestamp = DateTime.Parse(dateTime),
+                                        Signals = signals
+                                    };
+                                    Results.Add(timestampData);
+                                    signals = null;
+                                
+                            }
+                            else
+                            {
+                                timestampData = Results.Where(x => x.Timestamp == DateTime.Parse(dateTime)).FirstOrDefault();
+                                //if the timestamp does not exist add the timestamp with the new signal in the signal list
+                                if (timestampData == null)
+                                {
+                                        Signal signal = new Signal()
+                                        {
+                                            SignalName = this[i - 1].ChannelName,
+                                            SignalUnit = this[i - 1].ChannelUnits,
+                                            SigValue = Values[i]
+                                        };
+                                        signals.Add(signal);
+
+                                        timestampData = new TimestampData()
+                                        {
+
+                                            Timestamp = DateTime.Parse(dateTime),
+                                            Signals = signals
+                                        };
+                                        Results.Add(timestampData);
+                                        signals = null;
+                                    
+                                }
+                                //if the timestamp already exists add signal to signal list of this timestamp
+                                else
+                                {
+                                        Signal signal = new Signal()
+                                        {
+                                            SignalName = this[i - 1].ChannelName,
+                                            SignalUnit = this[i - 1].ChannelUnits,
+                                            SigValue = Values[i]
+                                        };
+                                        timestampData.Signals.Add(signal);
+                                   
+                                };
+                            }
+                            signals = null;
+                            timestampData = null;
+                        }
+                    }
+                    Values = GetValues();
+                }
+                return Results;
+                Results = null;
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
     }

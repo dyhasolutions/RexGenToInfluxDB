@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.Schema;
+using MODELS;
 
 namespace RXD.Base
 {
@@ -54,6 +55,10 @@ namespace RXD.Base
         readonly internal string rxeUri = "";
         readonly internal byte[] rxdBytes = null;
         public string Error = "";
+
+        public double TempTime = double.NaN;
+        public double TempData = double.NaN;
+        public bool TempEof = false;
 
         Int64 rxdFullSize;
         public Int64 rxdSize => rxdFullSize;
@@ -969,6 +974,18 @@ namespace RXD.Base
         {
             using (XmlHandler xml = new XmlHandler(xmlFileName))
                 return ReadXmlContent(xml);
+        }
+
+        public List<TimestampData> ExportToCustomObjects(ExportSettings settings)
+        {
+            List<TimestampData> result = new List<TimestampData>();
+
+            DoubleDataCollection doubleDatas = new DoubleDataCollection(SerialNumber, settings.StorageCache);
+            doubleDatas = ToDoubleData(settings);
+
+            result = doubleDatas.ToInfluxDB();
+
+            return result;
         }
 
     }
