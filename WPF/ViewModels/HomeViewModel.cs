@@ -155,7 +155,7 @@ namespace WPF.ViewModels
         public string ExportingStatus
         {
             get { return _exportingStatus; }
-            set { _exportingStatus = value; }
+            set { _exportingStatus = value; NotifyPropertyChanged(); }
         }
         public ObservableCollection<Vehicle> Vehicles
         {
@@ -425,6 +425,17 @@ namespace WPF.ViewModels
             CreateVehicleVisibility = Visibility.Collapsed;
             CreateServerVisibility = Visibility.Collapsed;
             ExportingStatus = "";
+            string model_type = $"{SelectedVehicle.Model}-{SelectedVehicle.Type}";
+
+            Server selectedServer = unitOfWork.ServerRepo
+                .Get()
+                .Where(x => x.ID == SelectedServer.ID)
+                .FirstOrDefault();
+
+            ServerCredentials serverCredentials = unitOfWork.ServerCredentialsRepo
+                .Get()
+                .Where(x => x.ID == selectedServer.ServerCredentialsID)
+                .FirstOrDefault();
 
             //DBC logic
             Stream dbcStream = new MemoryStream(File.ReadAllBytes(InputPathDBCFile));
@@ -474,6 +485,7 @@ namespace WPF.ViewModels
                 {
                     Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
                     string filename = Path.GetFileName(rxdFile);
+                    ExportingStatus = $"Importing {filename}";
 
                     using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
                         if (rxd is not null)
@@ -488,19 +500,14 @@ namespace WPF.ViewModels
                             }
                             );
                         };
-                    //InfluxDBHelper.WriteToInfluxDB(timestampDatas, test);
-
-                    //using (FileStream fs = new FileStream("C:/Users/dylan/Desktop/test2.csv", FileMode.Create, System.IO.FileAccess.Write))
-                    //    DataHelper.Convert(rxd, new BinRXD.ExportSettings()
-                    //    {
-                    //        StorageCache = StorageCacheType.Memory,
-                    //        SignalsDatabase = new() { dbcCollection = signalsCollection },
-                    //    }, fs, "csv:influxdb");
+                    ExportingStatus = $"Exporting {filename} to the selected InfluxDB server";
+                    InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN, selectedServer.IP_URL, serverCredentials.Token);
+                    ExportingStatus = "";
                 }
             }
             catch (Exception ex)
             {
-                ExportingStatus = ex.ToString();
+                ExportingStatus = ex.Message;
             }
 
         }

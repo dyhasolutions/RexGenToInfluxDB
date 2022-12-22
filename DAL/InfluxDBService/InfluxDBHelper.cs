@@ -13,13 +13,14 @@ namespace DAL.InfluxDBService
     {
         InfluxDBService _influxDBService = new InfluxDBService();
 
-        public void WriteToInfluxDB(List<TimestampData> timestampDataSamples, string dataloggerSerialNumber)
+        public void WriteToInfluxDB(List<TimestampData> timestampDataSamples, string manufacturer, string model_type, string VIN, string IP_URL, string token)
         {
             List<PointData> fields = new List<PointData>();
 
             foreach (TimestampData dataPoint in timestampDataSamples)
             {
-                PointData point = PointData.Measurement("InfluxLoggerTest").Tag("logger", dataloggerSerialNumber)
+                PointData point = PointData.Measurement(model_type)
+                    .Tag("VIN", VIN)
                     .Timestamp(dataPoint.Timestamp.ToUniversalTime(), WritePrecision.Ns);
 
                 foreach (Signal signal in dataPoint.Signals)
@@ -28,13 +29,25 @@ namespace DAL.InfluxDBService
                 }
 
                 fields.Add(point);
+
+                if (fields.Count >= 5000)
+                {
+                    _influxDBService.Write(write =>
+                    {
+                        write.WritePoints(fields, manufacturer, "Influx Technology");
+                    }, IP_URL, token);
+                    fields.Clear();
+                }
             }
 
-
-            _influxDBService.Write(write =>
+            if (fields.Count > 0)
             {
-                write.WritePoints(fields, "test2", "Influx Technology");
-            });
+                _influxDBService.Write(write =>
+                {
+                    write.WritePoints(fields, manufacturer, "Influx Technology");
+                }, IP_URL, token);
+                fields.Clear();
+            }
         }
     }
 }

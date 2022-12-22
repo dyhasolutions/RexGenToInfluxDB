@@ -975,18 +975,5 @@ namespace RXD.Base
             using (XmlHandler xml = new XmlHandler(xmlFileName))
                 return ReadXmlContent(xml);
         }
-
-        public List<TimestampData> ExportToCustomObjects(ExportSettings settings)
-        {
-            List<TimestampData> result = new List<TimestampData>();
-
-            DoubleDataCollection doubleDatas = new DoubleDataCollection(SerialNumber, settings.StorageCache);
-            doubleDatas = ToDoubleData(settings);
-
-            result = doubleDatas.ToInfluxDB();
-
-            return result;
-        }
-
     }
 }

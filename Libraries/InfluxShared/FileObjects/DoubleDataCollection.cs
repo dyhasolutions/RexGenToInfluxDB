@@ -166,7 +166,7 @@ namespace InfluxShared.FileObjects
                 data.FinishWrite(EndTime);
         }
 
-        double[] GetValues(double Timestamp = double.NaN)
+        public double[] GetValues(double Timestamp = double.NaN)
         {
             if (double.IsNaN(Timestamp))
                 Timestamp = LowestTime();
@@ -348,6 +348,30 @@ namespace InfluxShared.FileObjects
                             // the list of results is empty create the first timestampdata
                             if (Results.Count() == 0)
                             {
+                                Signal signal = new Signal()
+                                {
+                                    SignalName = this[i - 1].ChannelName,
+                                    SignalUnit = this[i - 1].ChannelUnits,
+                                    SigValue = Values[i]
+                                };
+                                signals.Add(signal);
+
+                                timestampData = new TimestampData()
+                                {
+
+                                    Timestamp = DateTime.Parse(dateTime),
+                                    Signals = signals
+                                };
+                                Results.Add(timestampData);
+                                signals = null;
+                                
+                            }
+                            else
+                            {
+                                timestampData = Results.Where(x => x.Timestamp == DateTime.Parse(dateTime)).FirstOrDefault();
+                                //if the timestamp does not exist add the timestamp with the new signal in the signal list
+                                if (timestampData == null)
+                                {
                                     Signal signal = new Signal()
                                     {
                                         SignalName = this[i - 1].ChannelName,
@@ -364,42 +388,18 @@ namespace InfluxShared.FileObjects
                                     };
                                     Results.Add(timestampData);
                                     signals = null;
-                                
-                            }
-                            else
-                            {
-                                timestampData = Results.Where(x => x.Timestamp == DateTime.Parse(dateTime)).FirstOrDefault();
-                                //if the timestamp does not exist add the timestamp with the new signal in the signal list
-                                if (timestampData == null)
-                                {
-                                        Signal signal = new Signal()
-                                        {
-                                            SignalName = this[i - 1].ChannelName,
-                                            SignalUnit = this[i - 1].ChannelUnits,
-                                            SigValue = Values[i]
-                                        };
-                                        signals.Add(signal);
-
-                                        timestampData = new TimestampData()
-                                        {
-
-                                            Timestamp = DateTime.Parse(dateTime),
-                                            Signals = signals
-                                        };
-                                        Results.Add(timestampData);
-                                        signals = null;
                                     
                                 }
                                 //if the timestamp already exists add signal to signal list of this timestamp
                                 else
                                 {
-                                        Signal signal = new Signal()
-                                        {
-                                            SignalName = this[i - 1].ChannelName,
-                                            SignalUnit = this[i - 1].ChannelUnits,
-                                            SigValue = Values[i]
-                                        };
-                                        timestampData.Signals.Add(signal);
+                                    Signal signal = new Signal()
+                                    {
+                                        SignalName = this[i - 1].ChannelName,
+                                        SignalUnit = this[i - 1].ChannelUnits,
+                                        SigValue = Values[i]
+                                    };
+                                    timestampData.Signals.Add(signal);
                                    
                                 };
                             }
