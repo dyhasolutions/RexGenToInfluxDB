@@ -420,7 +420,7 @@ namespace WPF.ViewModels
                 VIN = "";
             }
         }
-        private void ExportRXDFilesToInfluxDB()
+        private async void ExportRXDFilesToInfluxDB()
         {
             CreateVehicleVisibility = Visibility.Collapsed;
             CreateServerVisibility = Visibility.Collapsed;
@@ -483,27 +483,16 @@ namespace WPF.ViewModels
             {
                 foreach (string rxdFile in RXDFiles)
                 {
-                    Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
                     string filename = Path.GetFileName(rxdFile);
                     ExportingStatus = $"Importing {filename}";
+                    Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
 
-                    using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
-                        if (rxd is not null)
-                        {
-                            timestampDatas = rxd.ExportToCustomObjects(new BinRXD.ExportSettings()
-                            {
-                                StorageCache = StorageCacheType.Memory,
-                                SignalsDatabase = new()
-                                {
-                                    dbcCollection = signalsCollection
-                                }
-                            }
-                            );
-                        };
+                    timestampDatas = ExportRXDFileToInfluxDB(filename, rxdStream, signalsCollection);
+
                     ExportingStatus = $"Exporting {filename} to the selected InfluxDB server";
 
                     string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
-                    InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
+                    await InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
                         selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber);
 
                     ExportingStatus = "";
@@ -514,6 +503,26 @@ namespace WPF.ViewModels
                 ExportingStatus = ex.Message;
             }
 
+        }
+        private List<TimestampData> ExportRXDFileToInfluxDB(string filename, Stream rxdStream, ExportDbcCollection signalsCollection)
+        {
+            List < TimestampData > timestampDatas = new List < TimestampData >();
+
+            using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
+                if (rxd is not null)
+                {
+                    timestampDatas = rxd.ExportToCustomObjects(new BinRXD.ExportSettings()
+                    {
+                        StorageCache = StorageCacheType.Memory,
+                        SignalsDatabase = new()
+                        {
+                            dbcCollection = signalsCollection
+                        }
+                    }
+                    );
+                };
+
+            return timestampDatas;
         }
         #endregion
     }

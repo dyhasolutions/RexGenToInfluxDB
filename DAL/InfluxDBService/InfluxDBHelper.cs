@@ -2,6 +2,7 @@
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 using MODELS;
+using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,21 @@ namespace DAL.InfluxDBService
     public class InfluxDBHelper
     {
         InfluxDBService _influxDBService = new InfluxDBService();
-        private string organisation = "Influx Technology";
-        BucketRetentionRules bucketRetentionRules = new BucketRetentionRules()
-        {
-            EverySeconds = 0
-        };
+        private string organization = "Influx Technology";
 
-        public async void WriteToInfluxDB(List<TimestampData> timestampDataSamples, string manufacturer, 
+        public async Task WriteToInfluxDB(List<TimestampData> timestampDataSamples, string manufacturer, 
             string model_type, string VIN, string IP_URL, string token, string dataloggerSerialNumber)
         {
-            Bucket bucket = await CheckOrCreateBucket(manufacturer, IP_URL, token);
+            List<Organization> organizations = await GetOrganizationsByName(organization, IP_URL, token);
+            Organization selectedOrganization = organizations
+                .Where(x => x.Name == organization)
+                .FirstOrDefault();
+
+            Bucket bucket = await CheckOrCreateBucket(manufacturer, IP_URL, token, selectedOrganization);
 
             List<PointData> fields = new List<PointData>();
 
-            if (bucket is not null)
+            if (bucket is not null && selectedOrganization is not null)
             {
                 foreach (TimestampData dataPoint in timestampDataSamples)
                 {
@@ -46,7 +48,7 @@ namespace DAL.InfluxDBService
                     {
                         _influxDBService.Write(write =>
                         {
-                            write.WritePoints(fields, manufacturer, "Influx Technology");
+                            write.WritePoints(fields, manufacturer, selectedOrganization.Name);
                         }, IP_URL, token);
                         fields.Clear();
                     }
@@ -56,21 +58,29 @@ namespace DAL.InfluxDBService
                 {
                     _influxDBService.Write(write =>
                     {
-                        write.WritePoints(fields, manufacturer, "Influx Technology");
+                        write.WritePoints(fields, manufacturer, selectedOrganization.Name);
                     }, IP_URL, token);
                     fields.Clear();
                 }
             }
         }
 
-        private Task<Bucket> CheckOrCreateBucket(string bucket, string IP_URL, string token)
+        private async Task<List<Organization>> GetOrganizationsByName(string organisation, string IP_URL, string token)
         {
             using var client = InfluxDBClientFactory.Create(IP_URL, token);
-            var bucketInfo = client.GetBucketsApi().FindBucketByNameAsync(bucket);
+            var organizations = await client.GetOrganizationsApi().FindOrganizationsAsync(null, null, null, organization);
+
+            return organizations;
+        }
+
+        private async Task<Bucket> CheckOrCreateBucket(string bucket, string IP_URL, string token, Organization organization)
+        {
+            using var client = InfluxDBClientFactory.Create(IP_URL, token);
+            var bucketInfo = await client.GetBucketsApi().FindBucketByNameAsync(bucket);
 
             if (bucketInfo == null)
             {
-                bucketInfo = client.GetBucketsApi().CreateBucketAsync(bucket, bucketRetentionRules, organisation) ;
+                bucketInfo = await client.GetBucketsApi().CreateBucketAsync(bucket, organization) ;
             }
 
             return bucketInfo;
