@@ -501,7 +501,11 @@ namespace WPF.ViewModels
                             );
                         };
                     ExportingStatus = $"Exporting {filename} to the selected InfluxDB server";
-                    InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN, selectedServer.IP_URL, serverCredentials.Token);
+
+                    string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
+                    InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
+                        selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber);
+
                     ExportingStatus = "";
                 }
             }

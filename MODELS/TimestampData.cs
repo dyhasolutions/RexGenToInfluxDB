@@ -12,6 +12,14 @@ namespace MODELS
         private double _latitude;
         private double _longitude;
         private List<Signal> _signals;
+        private string _dataloggerSerialNumber;
+
+        public string DataloggerSerialNumber
+        {
+            get { return _dataloggerSerialNumber; }
+            set { _dataloggerSerialNumber = value; }
+        }
+
 
         public List<Signal> Signals
         {

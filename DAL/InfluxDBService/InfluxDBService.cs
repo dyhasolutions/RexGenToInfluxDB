@@ -1,4 +1,5 @@
 ﻿using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,7 @@ namespace DAL.InfluxDBService
 {
     public class InfluxDBService
     {
-        private readonly string _token;
-
-        public InfluxDBService()
-        {
-            _token = "J0xcqaPyCAQhaR65sagVtpsop3tmcFsR_BYGZbhz7gqIy883YHKc5e4aEGvtR0ZOpHjAdYM9_9xxNTUdiGAjwA==";
-        }
+        public InfluxDBService() { }
 
         public async void Write(Action<WriteApi> action, string IP_URL, string token)
         {
@@ -23,9 +19,9 @@ namespace DAL.InfluxDBService
             action(write);
         }
 
-        public async Task<T> QueryAsync<T>(Func<QueryApi, Task<T>> action)
+        public async Task<T> QueryAsync<T>(Func<QueryApi, Task<T>> action, string IP_URL, string token)
         {
-            using var client = InfluxDBClientFactory.Create("http://192.168.0.126:8086", _token);
+            using var client = InfluxDBClientFactory.Create(IP_URL, token);
             var query = client.GetQueryApi();
             return await action(query);
         }

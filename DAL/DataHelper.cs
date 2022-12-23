@@ -7,6 +7,7 @@ using RXD.DataRecords;
 using RXD.Objects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -537,7 +538,8 @@ namespace DAL
                 TimestampData dataSample = new TimestampData()
                 {
                     Timestamp = TimestampToString(values[0]),
-                    Signals = dataSampleSignals
+                    Signals = dataSampleSignals,
+                    DataloggerSerialNumber = ddc.DisplayName
                 };
                 timestampDataSamples.Add(dataSample);
 
@@ -550,7 +552,6 @@ namespace DAL
             ProgressCallback?.Invoke(100);
             return timestampDataSamples;
         }
-
     }
     
 }
