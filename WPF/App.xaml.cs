@@ -9,6 +9,9 @@ using System.Windows.Markup;
 using System.Globalization;
 using WPF.ViewModels;
 using WPF.Views;
+using DAL.Data.UnitOfWork;
+using DAL.VehicleServerService;
+using MODELS.ErrorHAndling;
 
 namespace WPF
 {
@@ -25,22 +28,41 @@ namespace WPF
             set { _homeViewModel = value; }
         }
 
+        private IUnitOfWork unitOfWork = new UnitOfWork(new VehicleServerContext());
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            MainViewModel mvModel = new MainViewModel();
-            MainView main = new MainView
+            try
             {
-                DataContext = mvModel
-            };
-            main.Show();
+                MainViewModel mvModel = new MainViewModel();
+                MainView main = new MainView
+                {
+                    DataContext = mvModel
+                };
+                main.Show();
 
-            HomeViewModel = new HomeViewModel();
-            main.mainPanel.Children.Clear();
-            Home homeViewStartup = new Home
+                HomeViewModel = new HomeViewModel();
+                main.mainPanel.Children.Clear();
+                Home homeViewStartup = new Home
+                {
+                    DataContext = HomeViewModel
+                };
+                main.mainPanel.Children.Add(homeViewStartup);
+            }
+            catch (Exception ex)
             {
-                DataContext = HomeViewModel
-            };
-            main.mainPanel.Children.Add(homeViewStartup);
+                ExcpetionError excpetionError = new ExcpetionError()
+                {
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace
+                };
+                if (excpetionError is not null)
+                {
+
+                    unitOfWork.ExceptionErrorRepo.Add(excpetionError);
+                };
+            }
+            
         }
 
         protected override void OnStartup(StartupEventArgs e)

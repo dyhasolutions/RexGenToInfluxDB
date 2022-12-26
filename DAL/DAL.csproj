@@ -240,6 +240,10 @@
     <Compile Include="Migrations\20221218162246_initialCreate.designer.cs">
       <DependentUpon>20221218162246_initialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20221226111436_addedExceptionErrorTable.cs" />
+    <Compile Include="Migrations\20221226111436_addedExceptionErrorTable.designer.cs">
+      <DependentUpon>20221226111436_addedExceptionErrorTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\VehicleServerContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleServerService\VehicleServerContext.cs" />

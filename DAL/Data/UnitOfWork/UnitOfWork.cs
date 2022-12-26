@@ -1,5 +1,6 @@
 ﻿using DAL.Data.Repositories;
 using DAL.VehicleServerService;
+using MODELS.ErrorHAndling;
 using MODELS.VehicleServerInfo;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,21 @@ namespace DAL.Data.UnitOfWork
         private IRepository<ServerCredentials> _serverCredentialsRepo;
         private IRepository<ServerType> _serverTypeRepo;
         private IRepository<Vehicle> _vehicleRepo;
+        private IRepository<ExcpetionError> _exceptionError;
         #endregion
 
         #region Repositories
-
+        public IRepository<ExcpetionError> ExceptionErrorRepo
+        {
+            get
+            {
+                if (_exceptionError == null)
+                {
+                    _exceptionError = new Repository<ExcpetionError>(this.VehicleServerContext);
+                }
+                return _exceptionError;
+            }
+        }
         public IRepository<Datalogger> DataloggerRepo
         {
             get

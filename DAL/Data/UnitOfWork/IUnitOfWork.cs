@@ -1,4 +1,5 @@
 ﻿using DAL.Data.Repositories;
+using MODELS.ErrorHAndling;
 using MODELS.VehicleServerInfo;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace DAL.Data.UnitOfWork
         IRepository<ServerCredentials> ServerCredentialsRepo { get; }
         IRepository<ServerType> ServerTypeRepo { get; }
         IRepository<Vehicle> VehicleRepo { get; }
+        IRepository<ExcpetionError> ExceptionErrorRepo { get; }
 
         int Save();
     }

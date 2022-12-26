@@ -19,6 +19,7 @@ using MODELS;
 using InfluxShared.FileObjects;
 using RXD.Base;
 using DAL;
+using MODELS.ErrorHAndling;
 
 namespace WPF.ViewModels
 {
@@ -500,6 +501,17 @@ namespace WPF.ViewModels
             }
             catch (Exception ex)
             {
+                ExcpetionError excpetionError = new ExcpetionError()
+                {
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace
+                };
+                if (excpetionError is not null)
+                {
+
+                    unitOfWork.ExceptionErrorRepo.Add(excpetionError);
+                };
+
                 ExportingStatus = ex.Message;
             }
 

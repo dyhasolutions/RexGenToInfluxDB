@@ -16,6 +16,25 @@ namespace DAL.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("MODELS.ErrorHAndling.ExcpetionError", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StackTrace")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ExceptionErrors");
+                });
+
             modelBuilder.Entity("MODELS.VehicleServerInfo.Datalogger", b =>
                 {
                     b.Property<int>("ID")
