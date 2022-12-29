@@ -68,7 +68,7 @@ namespace InfluxShared.FileObjects
         public string Name { get; set; }
         public uint CANID { get; set; }
         public string HexIdent => "0x" + (isExtended ? CANID.ToString("X8") : CANID.ToString("X3"));
-        public byte DLC { get; set; }
+        public ushort DLC { get; set; }
         public DBCMessageType MsgType { get; set; }
         public bool isExtended => MsgType == DBCMessageType.Extended || MsgType == DBCMessageType.CanFDExtended || MsgType == DBCMessageType.J1939PG;
         public string Transmitter { get; set; }

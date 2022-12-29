@@ -395,7 +395,7 @@ namespace RXD.Base
 
         public bool ToMF4(string outputfn, ExportCollections frameSignals = null, Action<object> ProgressCallback = null)
         {
-            bool FindMessageFrameID(RecBase rec, out UInt16 GroupID, out byte DLC)
+            bool FindMessageFrameID(RecBase rec, out UInt16 GroupID, out ushort DLC)
             {
                 if (rec is RecCanTrace)
                 {
@@ -503,7 +503,7 @@ namespace RXD.Base
                                             WriteMdfFrame(mdfframe);
 
                                         if (frameSignals != null)
-                                            if (FindMessageFrameID(rec, out UInt16 groupid, out byte DLC))
+                                            if (FindMessageFrameID(rec, out UInt16 groupid, out ushort DLC))
                                                 WriteMdfFrame(rec.ConvertToMdfMessageFrame(groupid, DLC));
                                     }
                                     ProgressCallback?.Invoke((int)dr.GetProgress);

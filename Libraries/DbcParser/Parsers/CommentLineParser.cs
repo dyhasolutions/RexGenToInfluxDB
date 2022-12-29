@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 
 namespace DbcParserLib.Parsers
@@ -19,7 +18,7 @@ namespace DbcParserLib.Parsers
                 SetSignalComment(cleanLine, builder);
                 return true;
             }
-            
+
             if (cleanLine.StartsWith("CM_ BU_"))
             {
                 SetNodeComment(cleanLine, builder);
@@ -38,7 +37,7 @@ namespace DbcParserLib.Parsers
         private static void SetSignalComment(string sigCommentStr, IDbcBuilder builder)
         {
             string[] records = sigCommentStr.SplitBySpace();
-            if(records.Length > 4 && uint.TryParse(records[2], out var messageId))
+            if (records.Length > 4 && uint.TryParse(records[2], out var messageId))
             {
                 builder.AddSignalComment(messageId, records[3], string.Join(Helpers.Space, records.Skip(4)).Trim(' ', '"', ';'));
             }

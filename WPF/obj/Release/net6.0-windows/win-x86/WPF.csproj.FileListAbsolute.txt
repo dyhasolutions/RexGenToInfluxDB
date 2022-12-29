@@ -593,3 +593,4 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x86\WPF.application
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\win-x86\WPF.dll.manifest
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\win-x86\WPF.application
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x86\vehicle_server.db

@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Dbc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DbcBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DbcParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDbcBuilder.cs" />
@@ -25,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\ILineParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\MessageLineParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\NodeLineParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parsers\PropertiesLineParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\SignalLineParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\UnknownLineParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parsers\ValueTableLineParser.cs" />

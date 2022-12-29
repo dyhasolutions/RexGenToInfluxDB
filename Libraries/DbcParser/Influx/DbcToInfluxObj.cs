@@ -1,6 +1,8 @@
 ﻿
 using DbcParserLib;
 using InfluxShared.FileObjects;
+using System;
+using System.Globalization;
 
 namespace DbcParserLib.Influx
 {
@@ -16,7 +18,7 @@ namespace DbcParserLib.Influx
                 msgI.DLC = msg.DLC;
                 msgI.Comment = msg.Comment;
                 msgI.Name = msg.Name;
-                msgI.MsgType = DBCMessageType.J1939PG;
+                msgI.MsgType = msg.IsExtID == true ? DBCMessageType.J1939PG : DBCMessageType.Standard;
                 msgI.Transmitter = msg.Transmitter;
                 
                 influxDBC.Messages.Add(msgI);
@@ -52,9 +54,12 @@ namespace DbcParserLib.Influx
             ExportDbcCollection signalsCollection = new ExportDbcCollection();
             foreach (var msg in dbc.Messages)
             {
-                var expmsg = signalsCollection.AddMessage(0, msg);
-                foreach (var sig in msg.Items)
-                    expmsg.AddSignal(sig);
+                for (int i = 0; i < 5; i++)
+                {
+                    var expmsg = signalsCollection.AddMessage(byte.Parse(i.ToString(), NumberStyles.AllowHexSpecifier), msg);
+                    foreach (var sig in msg.Items)
+                        expmsg.AddSignal(sig);
+                }
             }
             return signalsCollection;
         }

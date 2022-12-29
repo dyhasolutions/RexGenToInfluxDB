@@ -115,7 +115,7 @@ namespace RXD.DataRecords
             return frames;
         }
 
-        public override MessageFrame ConvertToMdfMessageFrame(UInt16 GroupID, byte DLC)
+        public override MessageFrame ConvertToMdfMessageFrame(UInt16 GroupID, ushort DLC)
         {
             if ((data.Flags & LinMessageFlags.Error) != 0)
                 return null;

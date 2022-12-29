@@ -10,11 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="vehicle_server.db" />
     <None Remove="Views\InfluxLogoWhite.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Influx.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="vehicle_server.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

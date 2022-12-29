@@ -428,25 +428,6 @@ namespace WPF.ViewModels
             ExportingStatus = "";
             string model_type = $"{SelectedVehicle.Model}-{SelectedVehicle.Type}";
 
-            Server selectedServer = unitOfWork.ServerRepo
-                .Get()
-                .Where(x => x.ID == SelectedServer.ID)
-                .FirstOrDefault();
-
-            ServerCredentials serverCredentials = unitOfWork.ServerCredentialsRepo
-                .Get()
-                .Where(x => x.ID == selectedServer.ServerCredentialsID)
-                .FirstOrDefault();
-
-            //DBC logic
-            Stream dbcStream = new MemoryStream(File.ReadAllBytes(InputPathDBCFile));
-            Dbc dbc = Parser.ParseFromStream(dbcStream);
-            DBC influxDBC = (DbcToInfluxObj.FromDBC(dbc) as DBC);
-            ExportDbcCollection signalsCollection = DbcToInfluxObj.LoadExportSignalsFromDBC(influxDBC);
-
-            MemoryStream outStream = new MemoryStream();
-            List<TimestampData> timestampDatas = new List<TimestampData>();
-
             #region form checks
             if (RXDFiles == null)
             {
@@ -482,21 +463,55 @@ namespace WPF.ViewModels
 
             try
             {
+                Server selectedServer = unitOfWork.ServerRepo
+                    .Get()
+                    .Where(x => x.ID == SelectedServer.ID)
+                    .FirstOrDefault();
+
+                ServerCredentials serverCredentials = unitOfWork.ServerCredentialsRepo
+                    .Get()
+                    .Where(x => x.ID == selectedServer.ServerCredentialsID)
+                    .FirstOrDefault();
+
+                //DBC logic
+                Stream dbcStream = new MemoryStream(File.ReadAllBytes(InputPathDBCFile));
+                Dbc dbc = Parser.ParseFromStream(dbcStream);
+                DBC influxDBC = (DbcToInfluxObj.FromDBC(dbc) as DBC);
+                ExportDbcCollection signalsCollection = DbcToInfluxObj.LoadExportSignalsFromDBC(influxDBC);
+
+                MemoryStream outStream = new MemoryStream();
+                List<TimestampData> timestampDatas = new List<TimestampData>();
+
+                string outputpath = "C:\\Users\\dylan\\Desktop/test5.csv";
+
                 foreach (string rxdFile in RXDFiles)
                 {
                     string filename = Path.GetFileName(rxdFile);
                     ExportingStatus = $"Importing {filename}";
                     Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
 
-                    timestampDatas = ExportRXDFileToInfluxDB(filename, rxdStream, signalsCollection);
+                    //timestampDatas = ExportRXDFileToInfluxDB(filename, rxdStream, signalsCollection);
 
                     ExportingStatus = $"Exporting {filename} to the selected InfluxDB server";
 
-                    string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
-                    await InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
-                        selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber);
+                    //string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
+                    //await InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
+                    //    selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber); 
+                    
+                    using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
+                        if (rxd is not null)
+                        {
+                            using (FileStream fs = new FileStream(outputpath, FileMode.Create, System.IO.FileAccess.Write))
+                                DataHelper.Convert(rxd, new BinRXD.ExportSettings()
+                                {
+                                    StorageCache = StorageCacheType.Memory,
+                                    SignalsDatabase = new() { dbcCollection = signalsCollection },
+                                }, fs, "csv");
+                        }
 
                     ExportingStatus = "";
+
+                    
                 }
             }
             catch (Exception ex)
@@ -508,8 +523,8 @@ namespace WPF.ViewModels
                 };
                 if (excpetionError is not null)
                 {
-
                     unitOfWork.ExceptionErrorRepo.Add(excpetionError);
+                    unitOfWork.Save();
                 };
 
                 ExportingStatus = ex.Message;

@@ -71,7 +71,7 @@ namespace RXD.DataRecords
             return new List<BaseDataFrame>();
         }
 
-        public virtual MessageFrame ConvertToMdfMessageFrame(UInt16 GroupID, byte DLC)
+        public virtual MessageFrame ConvertToMdfMessageFrame(UInt16 GroupID, ushort DLC)
         {
             return new MessageFrame();
         }
