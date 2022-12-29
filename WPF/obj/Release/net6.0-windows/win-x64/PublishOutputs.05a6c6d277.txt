@@ -187,7 +187,9 @@ C:\Users\dylan\Desktop\RXDToInfluxDB\PresentationFramework.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\PresentationUI.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\ReachFramework.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.CodeDom.dll
+C:\Users\dylan\Desktop\RXDToInfluxDB\System.Configuration.ConfigurationManager.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.Design.dll
+C:\Users\dylan\Desktop\RXDToInfluxDB\System.Diagnostics.EventLog.Messages.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.Diagnostics.EventLog.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.Diagnostics.PerformanceCounter.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.DirectoryServices.dll
@@ -269,7 +271,7 @@ C:\Users\dylan\Desktop\RXDToInfluxDB\dbgshim.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\hostfxr.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\hostpolicy.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\mscordaccore.dll
-C:\Users\dylan\Desktop\RXDToInfluxDB\mscordaccore_amd64_amd64_6.0.622.26707.dll
+C:\Users\dylan\Desktop\RXDToInfluxDB\mscordaccore_amd64_amd64_6.0.1222.56807.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\mscordbi.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\mscorrc.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\msquic.dll
@@ -545,7 +547,6 @@ C:\Users\dylan\Desktop\RXDToInfluxDB\RestSharp.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\SQLitePCLRaw.batteries_v2.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\SQLitePCLRaw.core.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\SQLitePCLRaw.provider.e_sqlite3.dll
-C:\Users\dylan\Desktop\RXDToInfluxDB\System.Configuration.ConfigurationManager.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\System.Reactive.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\e_sqlite3.dll
 C:\Users\dylan\Desktop\RXDToInfluxDB\DAL.dll

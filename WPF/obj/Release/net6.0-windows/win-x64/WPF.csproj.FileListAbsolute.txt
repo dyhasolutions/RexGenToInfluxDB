@@ -592,4 +592,5 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\win-x64\WPF.pdb
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\win-x64\ref\WPF.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x64\vehicle_server.db
-C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x64\mscordaccore_amd64_amd64_6.0.622.26707.dll
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x64\System.Diagnostics.EventLog.Messages.dll
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\win-x64\mscordaccore_amd64_amd64_6.0.1222.56807.dll
