@@ -140,7 +140,7 @@ namespace RXD.Base
                 DatalogStartTime = FileNameToDateTime(Path.GetFileNameWithoutExtension(rxdUri));
                 SerialNumber = FileNameToSerialNumber(Path.GetFileNameWithoutExtension(rxdUri));
                 if (!ReadRXD())
-                    throw new Exception("Error reading RXC data!");
+                    throw new Exception("Error reading RXD data!");
 
                 if (Config is null || Count == 0)
                     throw new Exception("Not a valid RXD file!");
@@ -176,14 +176,7 @@ namespace RXD.Base
         /// <returns></returns>
         public static BinRXD Load(string uri, Stream dataStream, Stream xsdStream = null)
         {
-            try
-            {
                 return new BinRXD(uri, dataStream, xsdStream);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
         }
 
         #region Destructors

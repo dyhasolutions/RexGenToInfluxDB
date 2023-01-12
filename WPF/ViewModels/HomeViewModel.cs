@@ -506,7 +506,7 @@ namespace WPF.ViewModels
                     //            {
                     //                StorageCache = StorageCacheType.Memory,
                     //                SignalsDatabase = new() { dbcCollection = signalsCollection },
-                    //            }, fs, "csv");
+                    //            }, fs, "csv:InfluxDB");
                     //    }
 
                     ExportingStatus = "";

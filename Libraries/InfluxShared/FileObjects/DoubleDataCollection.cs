@@ -302,8 +302,8 @@ namespace InfluxShared.FileObjects
                             {
                                 string text =
                                     DisplayName + "," +
-                                    this[i - 1].ChannelName + ',' +
-                                    Values[i].ToString(ci) + ',' +
+                                    this[i].ChannelName + ',' +
+                                    Values[i-1].ToString(ci) + ',' +
                                     DateTime.FromOADate(RealTime.ToOADate() + Values[0] / 86400).ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ");
                                 stream.WriteLine(text);
                             }
