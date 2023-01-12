@@ -522,31 +522,51 @@ namespace DAL
 
                 for (int i = 1; i < values.Length - 1; i++)
                 {
-
-                    if (!Double.IsNaN(values[i]) && !Double.IsInfinity(values[i]))
+                    if (i-1 <= 12)
                     {
-                        Signal signalValue = new Signal()
+                        if (!Double.IsNaN(values[i - 1]) && !Double.IsInfinity(values[i - 1]))
                         {
-                            SignalName = ddc[i-1].ChannelName,
-                            SignalUnit = ddc[i-1].ChannelUnits,
-                            SigValue = values[i]
-                        };
-                        dataSampleSignals.Add(signalValue);
+                            Signal signalValue = new Signal()
+                            {
+                                SignalName = ddc[i - 1].ChannelName,
+                                SignalUnit = ddc[i - 1].ChannelUnits,
+                                SigValue = values[i]
+                            };
+                            dataSampleSignals.Add(signalValue);
+                        }
                     }
+                    else
+                    {
+                        if (!Double.IsNaN(values[i - 1]) && !Double.IsInfinity(values[i - 1]))
+                        {
+                            Signal signalValue = new Signal()
+                            {
+                                SignalName = ddc[i - 1].ChannelName,
+                                SignalUnit = ddc[i - 1].ChannelUnits,
+                                SigValue = values[i-1]
+                            };
+                            dataSampleSignals.Add(signalValue);
+                        }
+                    }
+                    
+                    
                 }
-
-                TimestampData dataSample = new TimestampData()
+                if (dataSampleSignals.Count != 0)
                 {
-                    Timestamp = TimestampToString(values[0]),
-                    Signals = dataSampleSignals,
-                    DataloggerSerialNumber = ddc.DisplayName
-                };
-                timestampDataSamples.Add(dataSample);
+                    TimestampData dataSample = new TimestampData()
+                    {
+                        Timestamp = TimestampToString(values[0]),
+                        Signals = dataSampleSignals,
+                        DataloggerSerialNumber = ddc.DisplayName
+                    };
+                    timestampDataSamples.Add(dataSample);
 
-                //resetting dataSampleSignals
-                dataSampleSignals = null;
+                    //resetting dataSampleSignals
+                    dataSampleSignals = null;
 
-                values = ddc.GetValues();
+                    values = ddc.GetValues();
+                }
+                
             };
 
             ProgressCallback?.Invoke(100);
