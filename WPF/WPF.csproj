@@ -7,6 +7,7 @@
     <UseWPF>true</UseWPF>
     <LangVersion>9.0</LangVersion>
     <ApplicationIcon>Influx.ico</ApplicationIcon>
+    <PackageIcon>Influx.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,13 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Influx.ico" />
+    <Content Include="Influx.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="vehicle_server.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Content Include="vehicle_server.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -81,6 +84,13 @@
 
   <ItemGroup>
     <Folder Include="Media\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="\\RastiJunior\homes\DYHA-solutions\Projects\Influx Technology\Influx Brand Guidelines\Influx logos\Influx logos\Influx.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

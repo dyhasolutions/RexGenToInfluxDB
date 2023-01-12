@@ -9,5 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("influx.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("vehicle_server.db")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("influx.png")]
 
 

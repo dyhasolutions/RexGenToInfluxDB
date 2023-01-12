@@ -114,3 +114,5 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Debug\ne
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Debug\net6.0-windows\WPF.pdb
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Debug\net6.0-windows\WPF.genruntimeconfig.cache
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Debug\net6.0-windows\ref\WPF.dll
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Debug\net6.0-windows\Influx.ico
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Debug\net6.0-windows\vehicle_server.db

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="WPF.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="WPF.exe" version="1.0.0.11" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Influx.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -654,7 +654,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QltxENCZ9oMTDfqe3EBo1/axe1jpDv8mF4yrfSHcqcw=</dsig:DigestValue>
+      <dsig:DigestValue>3TN9ZCZRjE5IEGNQYSzQAaY/Q5ghT+OriYl/fddPNJo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="dbgshim.dll" size="140456">
@@ -1195,6 +1195,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>CqEBxbXYnrez/sJkItL7hTJvA8aBM58SPGCWb/DC9Pg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Influx.png" size="6159">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>QkpLmzYyJG+atl/eEugFd8M+7I2pN7375fdBFmNmpFw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="InfluxDB.Client.Core.dll" size="55808">
@@ -2040,7 +2049,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IY6UeT2L7UAjWQdGPSG/f9RLDR2h0i0gqUtuCSPhdTM=</dsig:DigestValue>
+      <dsig:DigestValue>H24sZXon9kSixzbNd9aSLR8dBaQfD+Vc1VkGyYoenG8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="mscordaccore.dll" size="1321856">
@@ -4653,6 +4662,15 @@
       <dsig:DigestValue>dv24P94jgia1vrrzOS7lYuLLfKjT73WYO/X51scRlkQ=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="vehicle_server.db" size="73728">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>8T61Az+oNiD9xI08p+5SPc2uL1+/LRLq92jHZLiDnHU=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="WindowsBase.dll" size="2258088">
     <hash>
       <dsig:Transforms>
@@ -4680,13 +4698,13 @@
       <dsig:DigestValue>0giCHl09u7TPeb0OEdYeUXhfAYHEf2lEiLfA/6n5amY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="WPF.dll" size="249344">
+  <file name="WPF.dll" size="179712">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>DgYUUGaF008tfP+Zyto4X9PtG3QTQ3ez5CkKM1IQfEU=</dsig:DigestValue>
+      <dsig:DigestValue>7hEj4chFfEkrZAag98ad0S3G43P5S1gE3QDm6QBSDPQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="WPF.exe" size="248320">
