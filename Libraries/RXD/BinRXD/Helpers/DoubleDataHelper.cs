@@ -25,12 +25,11 @@ namespace RXD.Helpers
             if (data is null)
             {
                 ChannelDescriptor ChannelDesc = signal.GetDescriptor;
+                    data = ddata.Add(id, ChannelName: ChannelDesc.Name, ChannelUnits: ChannelDesc.Units);
+                    data.BinaryHelper = ChannelDesc.CreateBinaryData();
+                    if (SourceAddress != 0xFF)
+                        data.ChannelName += " [SA: " + SourceAddress.ToString("X2") + "]";
 
-                data = ddata.Add(id, ChannelName: ChannelDesc.Name, ChannelUnits: ChannelDesc.Units);
-                data.BinaryHelper = ChannelDesc.CreateBinaryData();
-
-                if (SourceAddress != 0xFF)
-                    data.ChannelName += " [SA: " + SourceAddress.ToString("X2") + "]";
             }
             return data;
         }

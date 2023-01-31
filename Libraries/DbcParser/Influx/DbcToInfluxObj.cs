@@ -38,7 +38,7 @@ namespace DbcParserLib.Influx
                     sigI.Conversion.Formula.CoeffC = sig.Offset;
                     sigI.Conversion.Formula.CoeffF = 1;
                     sigI.Type = DBCSignalType.Standard;
-                    sigI.ValueType = sig.IsSigned == 0 ? DBCValueType.Signed : DBCValueType.Unsigned;
+                    sigI.ValueType = sig.IsSigned == 0 ? DBCValueType.Unsigned : DBCValueType.Signed;
                     sigI.ItemType = 0;                    
                     //sigI.Mode = sig.Multiplexing
 

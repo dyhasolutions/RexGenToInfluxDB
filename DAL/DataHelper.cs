@@ -520,36 +520,18 @@ namespace DAL
             {
                 List<Signal> dataSampleSignals = new List<Signal>();
 
-                for (int i = 1; i < values.Length - 1; i++)
+                for (int i = 1; i < values.Length; i++)
                 {
-                    if (i-1 <= 12)
+                    if (!Double.IsNaN(values[i]) && !Double.IsInfinity(values[i]))
                     {
-                        if (!Double.IsNaN(values[i - 1]) && !Double.IsInfinity(values[i - 1]))
+                        Signal signalValue = new Signal()
                         {
-                            Signal signalValue = new Signal()
-                            {
-                                SignalName = ddc[i - 1].ChannelName,
-                                SignalUnit = ddc[i - 1].ChannelUnits,
-                                SigValue = values[i]
-                            };
-                            dataSampleSignals.Add(signalValue);
-                        }
+                            SignalName = ddc[i - 1].ChannelName,
+                            SignalUnit = ddc[i - 1].ChannelUnits,
+                            SigValue = values[i]
+                        };
+                        dataSampleSignals.Add(signalValue);
                     }
-                    else
-                    {
-                        if (!Double.IsNaN(values[i - 1]) && !Double.IsInfinity(values[i - 1]))
-                        {
-                            Signal signalValue = new Signal()
-                            {
-                                SignalName = ddc[i - 1].ChannelName,
-                                SignalUnit = ddc[i - 1].ChannelUnits,
-                                SigValue = values[i-1]
-                            };
-                            dataSampleSignals.Add(signalValue);
-                        }
-                    }
-                    
-                    
                 }
                 if (dataSampleSignals.Count != 0)
                 {

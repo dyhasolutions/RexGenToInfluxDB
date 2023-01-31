@@ -115,8 +115,13 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB - Copy\WPF\obj\R
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB - Copy\WPF\obj\Release\net6.0-windows\WPF.pdb
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB - Copy\WPF\obj\Release\net6.0-windows\WPF.genruntimeconfig.cache
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB - Copy\WPF\obj\Release\net6.0-windows\ref\WPF.dll
+<<<<<<< HEAD
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\WPF.exe
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\Influx.ico
+=======
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\vehicle_server.db
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\WPF.exe
+>>>>>>> main
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\WPF.deps.json
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\WPF.runtimeconfig.json
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\WPF.dll
@@ -232,4 +237,7 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\WPF.pdb
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\WPF.genruntimeconfig.cache
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\obj\Release\net6.0-windows\ref\WPF.dll
+<<<<<<< HEAD
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\WPF\bin\Release\net6.0-windows\vehicle_server.db
+=======
+>>>>>>> main

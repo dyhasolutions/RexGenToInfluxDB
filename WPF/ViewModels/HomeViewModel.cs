@@ -482,7 +482,7 @@ namespace WPF.ViewModels
                 MemoryStream outStream = new MemoryStream();
                 List<TimestampData> timestampDatas = new List<TimestampData>();
 
-                string outputpath = "C:\\Users\\dylan\\Desktop/test5.csv";
+                //string outputpath = "C:\\Users\\dylan\\Desktop/test5.csv";
 
                 foreach (string rxdFile in RXDFiles)
                 {
