@@ -482,7 +482,7 @@ namespace WPF.ViewModels
                 MemoryStream outStream = new MemoryStream();
                 List<TimestampData> timestampDatas = new List<TimestampData>();
 
-                string outputpath = "C:\\Users\\dylan\\Desktop/test5.csv";
+                //string outputpath = "C:\\Users\\dylan\\Desktop/test5.csv";
 
                 foreach (string rxdFile in RXDFiles)
                 {
@@ -490,24 +490,24 @@ namespace WPF.ViewModels
                     ExportingStatus = $"Importing {filename}";
                     Stream rxdStream = new MemoryStream(File.ReadAllBytes(rxdFile));
 
-                    //timestampDatas = ExportRXDFileToInfluxDB(filename, rxdStream, signalsCollection);
+                    timestampDatas = ExportRXDFileToInfluxDB(filename, rxdStream, signalsCollection);
 
                     ExportingStatus = $"Exporting {filename} to the selected InfluxDB server";
 
-                    //string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
-                    //await InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
-                    //    selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber);
+                    string dataloggerSerialNumber = timestampDatas.Select(x => x.DataloggerSerialNumber).FirstOrDefault();
+                    await InfluxDBHelper.WriteToInfluxDB(timestampDatas, SelectedVehicle.Manufacturer, model_type, SelectedVehicle.VIN,
+                        selectedServer.IP_URL, serverCredentials.Token, dataloggerSerialNumber);
 
-                    using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
-                        if (rxd is not null)
-                        {
-                            using (FileStream fs = new FileStream(outputpath, FileMode.Create, System.IO.FileAccess.Write))
-                                DataHelper.Convert(rxd, new BinRXD.ExportSettings()
-                                {
-                                    StorageCache = StorageCacheType.Memory,
-                                    SignalsDatabase = new() { dbcCollection = signalsCollection },
-                                }, fs, "csv:InfluxDB");
-                        }
+                    //using (BinRXD rxd = BinRXD.Load($"http://www.test.com/RexGen {filename}", rxdStream))
+                    //    if (rxd is not null)
+                    //    {
+                    //        using (FileStream fs = new FileStream(outputpath, FileMode.Create, System.IO.FileAccess.Write))
+                    //            DataHelper.Convert(rxd, new BinRXD.ExportSettings()
+                    //            {
+                    //                StorageCache = StorageCacheType.Memory,
+                    //                SignalsDatabase = new() { dbcCollection = signalsCollection },
+                    //            }, fs, "csv:InfluxDB");
+                    //    }
 
                     ExportingStatus = "";
 
