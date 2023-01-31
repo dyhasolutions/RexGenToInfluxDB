@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/nT28mlERMftCvALb7f6lMlCuxjsVQT/j4kXb4Cm9fI1L9zJVGGCiLT704gkCgF4yqdkfkNl4ZxPNDoGUqh9zA==",
+  "dgSpecHash": "q1QTtWDEgnzwJHgv+/npstlITLmqhqbnA0Lt7Ukh71o6GAAUtwb6BDUXfhqIcYPqmAdrOmMW7GKbM3xr/eRIeQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\dylan\\Dropbox\\DYHA-solutions\\Projects\\RexGenToInfluxDB\\WPF\\WPF.csproj",
   "expectedPackageFiles": [
@@ -74,10 +74,7 @@
     "C:\\Users\\dylan\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\dylan\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\dylan\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\dylan\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\dylan\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.12\\microsoft.netcore.app.runtime.win-x64.6.0.12.nupkg.sha512",
-    "C:\\Users\\dylan\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.12\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.12.nupkg.sha512",
-    "C:\\Users\\dylan\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.12\\microsoft.aspnetcore.app.runtime.win-x64.6.0.12.nupkg.sha512"
+    "C:\\Users\\dylan\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
