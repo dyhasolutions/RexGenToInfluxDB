@@ -114,3 +114,5 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\obj\Debug\DA
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\obj\Debug\DAL.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\obj\Debug\DAL.pdb
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\bin\Debug\PropertyChanged.dll
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\DAL\bin\Debug\PropertyChanged.xml

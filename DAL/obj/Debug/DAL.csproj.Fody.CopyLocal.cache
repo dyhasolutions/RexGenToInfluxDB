@@ -33,6 +33,7 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\MODELS\bin\Debug
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTime.3.1.3\lib\netstandard2.0\NodaTime.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTime.Serialization.JsonNet.3.0.0\lib\netstandard2.0\NodaTime.Serialization.JsonNet.dll
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\PropertyChanged.Fody.4.1.0\lib\net40\PropertyChanged.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\RestSharp.108.0.2\lib\netstandard2.0\RestSharp.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\SQLitePCLRaw.bundle_e_sqlite3.2.1.2\lib\net461\SQLitePCLRaw.batteries_v2.dll
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\SQLitePCLRaw.core.2.1.2\lib\netstandard2.0\SQLitePCLRaw.core.dll
@@ -86,6 +87,7 @@ C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTim
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTime.3.1.3\lib\netstandard2.0\NodaTime.xml
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTime.Serialization.JsonNet.3.0.0\lib\netstandard2.0\NodaTime.Serialization.JsonNet.pdb
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\NodaTime.Serialization.JsonNet.3.0.0\lib\netstandard2.0\NodaTime.Serialization.JsonNet.xml
+C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\PropertyChanged.Fody.4.1.0\lib\net40\PropertyChanged.xml
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\RestSharp.108.0.2\lib\netstandard2.0\RestSharp.xml
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.xml
 C:\Users\dylan\Dropbox\DYHA-solutions\Projects\RexGenToInfluxDB\packages\System.Collections.Immutable.6.0.0\lib\net461\System.Collections.Immutable.xml
